@@ -1,21 +1,3 @@
-/* Removed light theme 
-// Theme toggle with persistence
-(function(){
-  const root = document.documentElement;
-  const saved = localStorage.getItem('pepe-theme');
-  if(saved){ root.classList.toggle('light', saved === 'light'); }
-  const btn = document.getElementById('themeBtn');
-  const setIcon = () => btn.textContent = root.classList.contains('light') ? '🌞' : '🌙';
-  setIcon();
-  btn.addEventListener('click',()=>{
-    root.classList.toggle('light');
-    localStorage.setItem('pepe-theme', root.classList.contains('light')?'light':'dark');
-    setIcon();
-  });
-})();
-*/
-
-
 // Mobile drawer
 (function () {
   const btn = document.getElementById('menuBtn');
@@ -52,4 +34,91 @@
   let i = 0; const el = document.getElementById('tList');
   const render = () => { el.style.opacity = 0; setTimeout(() => { el.innerHTML = `<div>“${quotes[i].t}”</div><div style="margin-top:.6rem;font-weight:800;color:var(--brand)">${quotes[i].a}</div>`; el.style.opacity = 1; }, 200); };
   render(); setInterval(() => { i = (i + 1) % quotes.length; render(); }, 4200);
+})();
+
+
+
+
+
+// Hero Slideshow Controller
+(function () {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let current = 0;
+  const interval = 5000; // 5 seconds per slide
+
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+
+  // Optional: Pause when tab is not active to save Chromebook resources
+  let sliderTimer = setInterval(nextSlide, interval);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearInterval(sliderTimer);
+    } else {
+      sliderTimer = setInterval(nextSlide, interval);
+    }
+  });
+})();
+
+
+
+(function () {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let current = 0;
+  
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+  }
+
+  setInterval(() => {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }, 5000);
+})();
+
+
+
+(function () {
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  let current = 0;
+  let timer;
+
+  function rotate() {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    
+    current = (current + 1) % slides.length;
+    
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function startTimer() {
+    timer = setInterval(rotate, 6000); // 6 seconds to allow for the zoom effect
+  }
+
+  // Handle visibility to save Chromebook resources
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) clearInterval(timer);
+    else startTimer();
+  });
+
+  startTimer();
 })();
