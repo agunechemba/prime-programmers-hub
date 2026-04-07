@@ -290,6 +290,8 @@
 
   form.addEventListener('submit', e => {
     e.preventDefault();
+    
+    // UI state: Loading
     button.disabled = true;
     button.textContent = 'Applying...';
 
@@ -301,16 +303,24 @@
     })
     .then(res => res.text())
     .then(response => {
-      // --- Updated Success Logic ---
-      alert('You have applied! Check your mail for follow up.');
+      // UI state: Success
       button.textContent = 'Applied';
       form.reset();
-      // -----------------------------
+
+      // Show message inside the existing animation div instead of an alert
+      animation.style.display = 'block';
+      animation.innerHTML = 'You have applied! Check your mail for follow up.';
+      animation.style.color = '#28a745'; // Optional: makes the text green
     })
     .catch(error => {
-      alert('Error: ' + error.message);
+      // UI state: Error
+      console.error('Error:', error);
       button.disabled = false;
       button.textContent = 'Apply';
+      
+      animation.style.display = 'block';
+      animation.innerHTML = 'Something went wrong. Please try again.';
+      animation.style.color = '#dc3545'; // Optional: makes error text red
     });
   });
 </script>
