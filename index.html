@@ -256,6 +256,7 @@
       </div>
     </section>
 
+    <!-- Start Application Form-->
 <section id="join" class="section reveal">
   <div class="panel join" style="text-align: center;">
 
@@ -266,60 +267,65 @@
       <form id="joinForm" style="max-width: 400px; margin: auto;">
         <input type="text" name="name" placeholder="Your Name" required
           style="width: 100%; padding: 12px; margin-bottom: 15px; font-size: 16px; box-sizing: border-box;" />
+        
         <input type="email" name="email" placeholder="Your Email" required
           style="width: 100%; padding: 12px; margin-bottom: 15px; font-size: 16px; box-sizing: border-box;" />
-        <input type="tel" name="phone" placeholder="Phone (include country code)" pattern="[1-9]{1,3}[0-9]{7,12}" title="Please enter your full number including country code (e.g., 234 for Nigeria), without the + sign." style="width: 100%; padding: 12px; margin-bottom: 15px; font-size: 16px; box-sizing: border-box;" />
+        
+        <input type="tel" name="phone" placeholder="Phone (include country code)" 
+          pattern="[1-9]{1,3}[0-9]{7,12}" 
+          title="Please enter your full number including country code (e.g., 234 for Nigeria), without the + sign." 
+          style="width: 100%; padding: 12px; margin-bottom: 15px; font-size: 16px; box-sizing: border-box;" />
+        
         <button type="submit" id="joinBtn" class="btn primary"
           style="width: 100%; padding: 12px; font-size: 16px; border: none; cursor: pointer; box-sizing: border-box; border-radius: 5px;">
           Apply
         </button>
       </form>
 
-      <div id="successAnimation" style="display: none; margin: 20px auto; width: 100px; height: 100px;">
-        <svg viewBox="0 0 52 52" style="width: 100px; height: 100px;">
-          <path fill="none" stroke="#28a745" stroke-width="5" d="M14 27l7 7 16-16" />
-          <circle fill="none" stroke="#28a745" stroke-width="5" cx="26" cy="26" r="24" />
-        </svg>
-      </div>
+      <div id="successAnimation" style="display: none; margin-top: 20px;"></div>
     </div>
 
-   <script>
-  const form = document.getElementById('joinForm');
-  const button = document.getElementById('joinBtn');
-  const animation = document.getElementById('successAnimation');
+    <script>
+      const form = document.getElementById('joinForm');
+      const button = document.getElementById('joinBtn');
+      const animation = document.getElementById('successAnimation');
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    button.disabled = true;
-    button.textContent = 'Applying...';
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        // Disable button and show loading state
+        button.disabled = true;
+        button.textContent = 'Applying...';
 
-    const data = new FormData(form);
+        const data = new FormData(form);
 
-    fetch('https://script.google.com/macros/s/AKfycbxG2s8T-yw2-7dGjPR-wZOdepBNtl-2-QjuouWK_F-0BrSklGf23P46JdUCaVx7HuQv/exec', {
-      method: 'POST',
-      body: data
-    })
-    .then(res => res.text())
-    .then(response => {
-      // Set button to final state
-      button.textContent = 'Applied';
-      form.reset();
+        // Replace the URL below with your deployed Google Apps Script Web App URL
+        fetch('https://script.google.com/macros/s/AKfycbxG2s8T-yw2-7dGjPR-wZOdepBNtl-2-QjuouWK_F-0BrSklGf23P46JdUCaVx7HuQv/exec', {
+          method: 'POST',
+          body: data
+        })
+        .then(res => res.text())
+        .then(response => {
+          // Update button to final state
+          button.textContent = 'Applied';
+          form.reset();
 
-      // Show the message with custom styling
-      animation.style.display = 'block';
-      animation.style.marginTop = '10px'; // Adds a little space above the text
-      animation.innerHTML = '<i style="color: #777;">You have applied! Check your email for follow up.</i>';
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      button.disabled = false;
-      button.textContent = 'Apply';
-    });
-  });
-</script>
+          // Display the success message in italics and light color
+          animation.style.display = 'block';
+          animation.innerHTML = '<i style="color: #777; font-size: 14px;">You have applied! Check your email for follow up.</i>';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Submission failed. Please try again.');
+          button.disabled = false;
+          button.textContent = 'Apply';
+        });
+      });
+    </script>
   </div>
 </section>
-
+<!-- End Application Form-->
+    
     <section id="testimonials" class="section reveal">
       <div class="panel testimonials">
         <h2 class="big">Success Stories</h2>
