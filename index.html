@@ -283,15 +283,13 @@
       </div>
     </div>
 
-    <script>
+   <script>
   const form = document.getElementById('joinForm');
   const button = document.getElementById('joinBtn');
   const animation = document.getElementById('successAnimation');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    
-    // UI state: Loading
     button.disabled = true;
     button.textContent = 'Applying...';
 
@@ -303,24 +301,19 @@
     })
     .then(res => res.text())
     .then(response => {
-      // UI state: Success
+      // Set button to final state
       button.textContent = 'Applied';
       form.reset();
 
-      // Show message inside the existing animation div instead of an alert
+      // Show the message with custom styling
       animation.style.display = 'block';
-      animation.innerHTML = 'You have applied! Check your mail for follow up.';
-      animation.style.color = '#28a745'; // Optional: makes the text green
+      animation.style.marginTop = '10px'; // Adds a little space above the text
+      animation.innerHTML = '<i style="color: #777;">You have applied! Check your mail for follow up.</i>';
     })
     .catch(error => {
-      // UI state: Error
       console.error('Error:', error);
       button.disabled = false;
       button.textContent = 'Apply';
-      
-      animation.style.display = 'block';
-      animation.innerHTML = 'Something went wrong. Please try again.';
-      animation.style.color = '#dc3545'; // Optional: makes error text red
     });
   });
 </script>
