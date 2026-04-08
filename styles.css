@@ -457,11 +457,17 @@ section+section {
   padding: 20px 0;
 }
 
+
+
 .ad-container img {
-  max-width: 100%;
-  height: auto;
+  width: 336px;
+  height: 280px;
   border-radius: 8px;
+  object-fit: cover; /* Prevents image distortion */
+  display: block;    /* Removes extra whitespace at the bottom */
 }
+
+
 
 /* Full-width Hero Slider Section */
 .hero-slider-section {
