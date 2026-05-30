@@ -1,12 +1,19 @@
 :root {
-  --bg: #013613;
-  --panel: #062c0b;
-  --text: #e5e7eb;
-  --muted: #9aa4b2;
-  --brand: #3b82f6;
-  --brand-2: #39d353;
-  --ring: rgba(59, 130, 246, .35);
-  --shadow: 0 10px 30px rgba(2, 6, 23, .35);
+  /* Background & Panels: Rich forest greens */
+  --bg: #0b2914;        /* Deep hunter green */
+  --panel: #113f1f;     /* Slightly lighter forest green for cards/panels */
+  
+  /* Text: Clean creams and soft whites */
+  --text: #fcfbf7;      /* Warm cream-white for high readability */
+  --muted: #b5beab;     /* Soft sage/muted cream for secondary text */
+  
+  /* Accents: Elegant Gold & Vibrant Yellow-Green */
+  --brand: #e5b842;     /* Warm, metallic gold for primary actions/links */
+  --brand-2: #eab308;   /* Vibrant touch of yellow for secondary highlights */
+  
+  /* UI Elements: Soft gold glow and deep shadows */
+  --ring: rgba(229, 184, 66, 0.25);  /* Subtle gold focus ring */
+  --shadow: 0 10px 30px rgba(5, 15, 8, 0.5); /* Deep shadow with a tint of dark green */
 }
 
 /* Apply to the whole page */
